@@ -155,45 +155,39 @@ namespace Document_Manager
             string path = Directory.GetCurrentDirectory() + @"\tree.dat";
             if (!File.Exists(path))
             {
-                File.Create(path);
+                File.WriteAllText(path,"");
             }
-            else
+            file = File.ReadAllLines(path);
+            int counter = 0;
+
+            Queue<string[]> blocks = new Queue<string[]>();
+
+            string[] block = new string[2];
+
+            foreach (string line in file)
             {
-                file = File.ReadAllLines(path);
-
-                int counter = 0;
-
-                Queue<string[]> blocks = new Queue<string[]>();
-
-                string[] block = new string[2];
-
-                foreach (string line in file)
+                if (counter == 0)
                 {
-                    if (counter == 0)
-                    {
-                        block[0] = line;
-                        counter++;
-                    }
-                    else if (counter == 1)
-                    {
-                        block[1] = line;
-                        counter++;
-                    }
-                    else
-                    {
-                        counter = 0;
-                        blocks.Enqueue(block);
-                        block = new string[2];
-                    }
+                    block[0] = line;
+                    counter++;
                 }
-
-                TreeViewItem tree = new TreeViewItem();
-                tree.Header = "Root";
-                tree.Foreground = Brushes.White;
-                return (GetTree(blocks, tree));
+                else if (counter == 1)
+                {
+                    block[1] = line;
+                    counter++;
+                }
+                else
+                {
+                    counter = 0;
+                    blocks.Enqueue(block);
+                    block = new string[2];
+                }
             }
-            return (new TreeViewItem());
-            
+
+            TreeViewItem tree = new TreeViewItem();
+            tree.Header = "Root";
+            tree.Foreground = Brushes.White;
+            return(GetTree(blocks, tree));
         }
     }
 }
