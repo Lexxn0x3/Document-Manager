@@ -39,26 +39,9 @@ namespace Document_Manager
             docs = dc.ReadFile();
             //tags.ReadFile();
 
+            
 
-
-
-
-            Tree myTree = new Tree();
-            myTree.Header = "root";
-
-            List<Tree> childs2 = new List<Tree>();
-            childs2.Add(new Tree("Test31"));
-            childs2.Add(new Tree("Test32"));
-
-            List<Tree> childs = new List<Tree>();
-            childs.Add(new Tree("Test1"));
-            childs.Add(new Tree("Test2"));
-            childs.Add(new Tree("Test3", childs2));
-            myTree.Childs = childs;
-
-            trv.Items.Add(GetStructure(myTree));
-            Tree tree = ReturnStructure((TreeViewItem)trv.Items[0]);
-            tree.WriteFile();
+            UpdateTree();
 
             //docs.Add(new Document(new Uri("file:///D:/Dokumente/Siemens/Siemens%20Ablauf%20Vorbereitung.pdf#toolbar=0"), "Siemens Ablauf Vorbereitung", tags.TagList[0]));
             //docs.Add(new Document(new Uri("file:///D:/Dokumente/Siemens/Siemens%20vorbereitung.pdf#toolbar=0"), "Siemens Vorbereitung", tags.TagList[0]));
@@ -205,28 +188,124 @@ namespace Document_Manager
             return (newTree);
         }
 
-        private void UpdateTree()
+        private void fillTree(TreeViewItem tree, Stack<string> tags)
         {
-            foreach (string tag in tags.TagList)
+            if (tree.Items.Count > 0)
             {
-                TreeViewItem newChild = new TreeViewItem();
-                newChild.Header = tag;
-                newChild.Foreground = Brushes.White;
-
-                foreach (Document doc in docs)
+                foreach (TreeViewItem child in tree.Items)
                 {
-                    if (doc.Tags.Contains(tag))
+                    tags.Push("" + child.Header);
+                    if (child.Items.Count > 0)
                     {
-                        TreeViewItem newChild2 = new TreeViewItem();
-                        newChild2.Header = doc.Name;
-                        newChild2.DataContext = doc;
-                        newChild2.Foreground = Brushes.White;
+                        fillTree(child, tags);
+                        tags.Pop();
+                    }
+                    else
+                    {
+                        foreach (Document doc in docs)
+                        {
+                            bool contains = true;
+                            foreach (string newTag in tags)
+                            {
+                                if (!doc.Tags.Contains(newTag))
+                                {
+                                    contains = false;
+                                }
+                            }
 
-                        newChild.Items.Add(newChild2);
+                            if (contains && tags.Count > 0)
+                            {
+                                TreeViewItem newChild2 = new TreeViewItem();
+                                newChild2.Header = doc.Name;
+                                newChild2.DataContext = doc;
+                                newChild2.Foreground = Brushes.White;
+                                child.Items.Add(newChild2);
+                            }
+                        }
+                        return;
                     }
                 }
-                trv.Items.Add(newChild);
+                return;
             }
+            //    foreach (TreeViewItem child in tree.Items)
+            //    {
+            //        tags.Push( " " + child.Header);
+
+            //        Stack<string> tag = new Stack<string>();
+            //        tag.Push(fillTree(child, tags, stack));
+                        
+            //        if (tag.Pop() != "")
+            //        {
+            //            tags.Push(fillTree(child, tags, stack));
+            //        }
+            //        else
+            //        {
+            //            foreach (Document doc in docs)
+            //            {
+            //                bool contains = true;
+            //                foreach (string newTag in tags)
+            //                {
+            //                    if (!doc.Tags.Contains(newTag))
+            //                    {
+            //                        contains = false;
+            //                    }
+            //                }
+
+            //                if (contains && tags.Count >0)
+            //                {
+            //                    TreeViewItem newChild2 = new TreeViewItem();
+            //                    newChild2.Header = doc.Name;
+            //                    newChild2.DataContext = doc;
+            //                    newChild2.Foreground = Brushes.White;
+            //                    child.Items.Add(newChild2);
+            //                }
+                            
+            //            }
+            //        }
+                    
+            //    }
+            //}
+            //else
+            //{
+            //    //stack.Push(tags);
+            //    //tags.Clear();
+            //    tags.Push("");
+            //    return (tags.Pop());
+                
+                
+            //}
+            //return ("");
+            
+        }
+        private void UpdateTree()
+        {
+            trv.Items.Clear();
+            Tree myTree = new Tree();
+            trv.Items.Add(myTree.Readfile());
+            TreeViewItem tree = (TreeViewItem)trv.Items[0];
+            fillTree(tree, new Stack<string>());
+
+
+            //foreach (string tag in tags.TagList)
+            //{
+            //    TreeViewItem newChild = new TreeViewItem();
+            //    newChild.Header = tag;
+            //    newChild.Foreground = Brushes.White;
+
+            //    foreach (Document doc in docs)
+            //    {
+            //        if (doc.Tags.Contains(tag))
+            //        {
+            //            TreeViewItem newChild2 = new TreeViewItem();
+            //            newChild2.Header = doc.Name;
+            //            newChild2.DataContext = doc;
+            //            newChild2.Foreground = Brushes.White;
+
+            //            newChild.Items.Add(newChild2);
+            //        }
+            //    }
+            //    trv.Items.Add(newChild);
+            //}
         }
 
         private void MenuItem_Click_New_Sub(object sender, RoutedEventArgs e)

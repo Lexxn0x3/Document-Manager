@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Document_Manager
 {
@@ -46,56 +47,100 @@ namespace Document_Manager
                     element += child.Header + "\n";
                     try
                     {
-                        element += (child.Childs.Count()).ToString() + "\n";
+                        element += (Count(child).ToString()) + "\n\n";
+                        //element += (child.Childs.Count()).ToString() + "\n\n";
                     }
                     catch (ArgumentNullException)
                     {
 
-                        element += 0 + "\n";
+                        element += 0 + "\n\n";
                     }
 
                     string chd = GetString(child.Childs);
                     if (chd != "" && chd != null)
                     {
-                        element += "\n" + GetString(child.Childs);
+                        element += GetString(child.Childs);
                     }
-                    
 
-                    file += element + "\n";
+
+                    file += element;
                 }
             }
             return (file);
         }
 
-        private List<Tree> GetTree(string[] file, List<Tree> tree)   //To be implemented
+        private int Count(Tree child)
         {
-            List<TreeViewItem> treeViewItems = new List<TreeViewItem>();
-            Tree element;
-            int counter = 0;
+            int count = 0;
 
-            foreach (string line in file)
+            if (child.Childs.Count() > 0)
             {
-                switch (counter)
+                foreach (Tree c in child.Childs)
                 {
-                    case 0:
-                        element = new Tree();
-                        element.Header = line;
-                        counter++;
-
-                        break;
-                    case 1:
-                        counter++;
-                        break;
-                    case 2:
-                        counter = 0;
-                        break;
-
+                    count++;
+                    if (c.Childs != null)
+                    {
+                        count += Count(c);
+                    }
                 }
+            }
 
+            return count;
+        }
+        private TreeViewItem GetTree(Queue<string[]> queue, TreeViewItem root)   //To be implemented
+        {
+            //TreeViewItem root = new TreeViewItem();
+
+            while (queue.Count > 0)
+            {
+                string[] block = queue.Dequeue();
+
+                TreeViewItem newChild = new TreeViewItem();
+                newChild.Header = block[0];
+                newChild.Foreground = Brushes.White;
+
+                
+
+                if (int.Parse(block[1]) > 0)
+                {
+                    Queue<string[]> newQueue = new Queue<string[]>();
+                    for (int i = 0; i < int.Parse(block[1]); i++)
+                    {
+                        newQueue.Enqueue(queue.Dequeue());
+                    }
+
+                    root.Items.Add(GetTree(newQueue, newChild));
+                }
+                else
+                {
+                    root.Items.Add(newChild);
+                }
                 
             }
 
-            return(tree);
+
+            //foreach (string tag in tags.TagList)
+            //{
+            //    TreeViewItem newChild = new TreeViewItem();
+            //    newChild.Header = tag;
+            //    newChild.Foreground = Brushes.White;
+
+            //    foreach (Document doc in docs)
+            //    {
+            //        if (doc.Tags.Contains(tag))
+            //        {
+            //            TreeViewItem newChild2 = new TreeViewItem();
+            //            newChild2.Header = doc.Name;
+            //            newChild2.DataContext = doc;
+            //            newChild2.Foreground = Brushes.White;
+
+            //            newChild.Items.Add(newChild2);
+            //        }
+            //    }
+            //    trv.Items.Add(newChild);
+            //}
+
+            return (root);
         }
 
         public void WriteFile()
@@ -104,11 +149,40 @@ namespace Document_Manager
             string path = Directory.GetCurrentDirectory() + @"\tree.dat";
             File.WriteAllText(path, file);
         }
-        public void Readfile()
+        public TreeViewItem Readfile()
         {
             string path = Directory.GetCurrentDirectory() + @"\tree.dat";
+            string[] file = File.ReadAllLines(path);
+            int counter = 0;
 
-            List<Tree> tree = GetTree(System.IO.File.ReadAllLines(path), Childs);
+            Queue<string[]> blocks = new Queue<string[]>();
+
+            string[] block = new string[2];
+
+            foreach (string line in file)
+            {
+                if (counter == 0)
+                {
+                    block[0] = line;
+                    counter++;
+                }
+                else if (counter == 1)
+                {
+                    block[1] = line;
+                    counter++;
+                }
+                else
+                {
+                    counter = 0;
+                    blocks.Enqueue(block);
+                    block = new string[2];
+                }
+            }
+
+            TreeViewItem tree = new TreeViewItem();
+            tree.Header = "Root";
+            tree.Foreground = Brushes.White;
+            return(GetTree(blocks, tree));
         }
     }
 }

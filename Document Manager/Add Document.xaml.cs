@@ -19,7 +19,7 @@ namespace Document_Manager
     /// <summary>
     /// Interaction logic for Add_Document.xaml
     /// </summary>
-    public partial class Add_Document : Window
+    public partial class Add_Document
     {
         public Add_Document()
         {
@@ -53,12 +53,12 @@ namespace Document_Manager
         {
             List<string> tags = new List<string>();
             Tags sytemTags = new Tags();
-            string[] tgs = Tags.Text.Split(' ');
+            string[] tgs = Tags.Text.Split(',');
             Uri url = null;
 
             foreach (string tag in tgs)
             {
-                tags.Add(tag);
+                tags.Add(tag.Trim());
                 sytemTags.AddTag(tag);
             }
 

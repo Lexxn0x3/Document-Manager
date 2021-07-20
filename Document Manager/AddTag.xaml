@@ -1,4 +1,4 @@
-﻿<Window x:Class="Document_Manager.AddTag"
+﻿<fw:AcrylicWindow x:Class="Document_Manager.AddTag"
         
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         
@@ -8,28 +8,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Document_Manager"
         mc:Ignorable="d"
-        Title="AddTag" Height="115" Width="450" Background="{DynamicResource WindowBackground}" ShowInTaskbar="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Foreground="{DynamicResource WindowHeader}">
+        Title="AddTag" Height="115" Width="450" ShowInTaskbar="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" NoiseOpacity="0.01" AcrylicWindowStyle="NoIcon" Foreground="White" TintColor="DimGray" FallbackColor="DimGray" TintOpacity="0.5">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="{DynamicResource WindowHeader}" MouseDown="Rectangle_MouseDown"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="25"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Add Tag" Foreground="LightGray" VerticalAlignment="Center" Margin="20,0,0,0" MouseDown="Rectangle_MouseDown"/>
-            <TextBlock Grid.Column="1" FontSize="15" Margin="3" Foreground="White" FontFamily="Segoe MDL2 Assets" Text="&#xE921;" VerticalAlignment="Center" MouseDown="TextBlock_MouseDown_1"/>
-            <TextBlock Grid.Column="2" FontSize="15" Margin="3" Foreground="White" FontFamily="Segoe MDL2 Assets" Text="&#xE711;" VerticalAlignment="Center" MouseDown="TextBlock_MouseDown"/>
-        </Grid>
-
-        <StackPanel Grid.Row="1" Margin="20,20,20,5">
+        <StackPanel Grid.Row="0" Margin="20,5,20,5">
             <Grid Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35"/>
@@ -43,13 +29,13 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBox Name="tags" Grid.Row="0" IsReadOnly="False" Foreground="White" Background="#FF333337" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <TextBlock Grid.Row="1" Text="Add multiple Tag's by seperating them with commas." Foreground="LightGray" FontSize="10" FontWeight="Light"/>
+                    <TextBox Name="tags" Grid.Row="0" IsReadOnly="False" Foreground="White" Background="Black" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Opacity="0.4"/>
+                    <TextBlock Grid.Row="1" Text="Add multiple Tag's by seperating them with commas." Foreground="LightGray" FontSize="12" FontWeight="Light"/>
 
                 </Grid>
 
             </Grid>
-            <Button Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Content="OK" Margin="0,0,0,0" Click="Button_Click"/>
+            <Button Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Content="OK" Margin="0,0,0,0" Click="Button_Click" Opacity="0.5" Background="Black" Foreground="White" BorderThickness="0"/>
         </StackPanel>
     </Grid>
-</Window>
+</fw:AcrylicWindow>

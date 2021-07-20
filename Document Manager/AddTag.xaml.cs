@@ -17,29 +17,12 @@ namespace Document_Manager
     /// <summary>
     /// Interaction logic for AddTag.xaml
     /// </summary>
-    public partial class AddTag : Window
+    public partial class AddTag
     {
         public string Tags { get; set; }
         public AddTag()
         {
             InitializeComponent();
-        }
-
-        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {this.DragMove();}
-            catch { }
-        }
-
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void TextBlock_MouseDown_1(object sender, MouseButtonEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
