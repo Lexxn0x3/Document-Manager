@@ -5,9 +5,10 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
-        <SolidColorBrush x:Key="WindowBackground" Color="#FF252525"/>
-        <SolidColorBrush x:Key="WindowHeader" Color="#FF1E1E1E"/>
-        <SolidColorBrush x:Key="GrayBackground" Color="#FF2D2D30"/>
+        <SolidColorBrush x:Key="WindowBackground" Color="#7F252525"/>
+        <SolidColorBrush x:Key="WindowHeader" Color="#7F1E1E1E"/>
+        <SolidColorBrush x:Key="GrayBackground" Color="#7F2D2D30"/>
         <SolidColorBrush x:Key="HeaderButtonWhite2" Color="#FFD8D8D8"/>
+        <SolidColorBrush x:Key="DarkGrayBackground" Color="#7F252526"/>
     </Application.Resources>
 </Application>

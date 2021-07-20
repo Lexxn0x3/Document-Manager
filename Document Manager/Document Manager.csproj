@@ -7,7 +7,18 @@
     <UseWPF>true</UseWPF>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>funktions.txt</PackageLicenseFile>
+    <ApplicationIcon>icons8-product-documents.ico</ApplicationIcon>
+    <Authors>Robin Rosner</Authors>
+    <Company />
+    <Copyright>Robin Rosner</Copyright>
+    <PackageIcon>icons8-product-documents-240.png</PackageIcon>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons8-add-documents.ico" />
+    <None Remove="icons8-add-tag.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentWPF" Version="0.9.0" />
@@ -19,6 +30,11 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons8-add-documents.ico" />
+    <Resource Include="icons8-add-tag.ico" />
   </ItemGroup>
 
 </Project>
