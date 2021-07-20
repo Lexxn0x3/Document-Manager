@@ -196,8 +196,12 @@ namespace Document_Manager
         {
             if (tree.Items.Count > 0)
             {
+                tree.IsExpanded = true;                    //<----------------Not Permanant!!!----------
+
                 foreach (TreeViewItem child in tree.Items)
                 {
+                    child.IsExpanded = true;                    //<----------------Not Permanant!!!----------
+
                     tags.Push("" + child.Header);
                     if (child.Items.Count > 0)
                     {

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Document_Manager"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"      
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1400" ShowInTaskbar="True" WindowStartupLocation="CenterScreen"  NoiseOpacity="0.025" TintColor="DimGray" TintOpacity="0.5" FallbackColor="DimGray" Foreground="White">
+        Title="Document Manager" Height="720" Width="1400" AcrylicWindowStyle="NoIcon" ShowInTaskbar="True" WindowStartupLocation="CenterScreen"  NoiseOpacity="0.025" TintColor="DimGray" TintOpacity="0.5" FallbackColor="DimGray" Foreground="White">
     <Window.Resources>
         <SolidColorBrush x:Key="HeaderButtonWhite" Color="#FFD8D8D8"/>
     </Window.Resources>
@@ -105,10 +105,11 @@
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="58*"/>
+                        <RowDefinition Height="259*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Explorer" VerticalAlignment="Stretch" FontSize="14" FontWeight="Light" Background="#FF007ACC" Foreground="White" />
-                    <TreeView Grid.Row="1" Name ="trv" Background="Transparent" Foreground="White" SelectedItemChanged="TreeView_SelectedItemChanged">
+                    <TextBlock Grid.Row="0" Padding="5,0,0,0" Text="Explorer" FontSize="14" FontWeight="Light" Background="#FF007ACC" Foreground="White" />
+                    <TreeView Grid.Row="1" Name ="trv" Background="Transparent" Foreground="White" SelectedItemChanged="TreeView_SelectedItemChanged" Grid.RowSpan="2">
                     </TreeView>
                 </Grid>
                 <TextBlock Grid.Column="2" x:Name="details" Foreground="White" ClipToBounds="True" UseLayoutRounding="True" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow"/>
