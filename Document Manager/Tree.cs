@@ -37,6 +37,7 @@ namespace Document_Manager
 
         private string GetString(List<Tree> Children)
         {
+            List<Tree> childrenCopy = Children;
             string file = "";
             if (Children != null)
             {

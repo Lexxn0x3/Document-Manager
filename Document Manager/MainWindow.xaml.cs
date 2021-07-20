@@ -181,7 +181,11 @@ namespace Document_Manager
                     child.Header = (string)item.Header;
                     child.Childs = ReturnStructure(item).Childs;
 
-                    newTree.Add(child);
+                    if (item.DataContext == null)
+                    {
+                        newTree.Add(child);
+                    }
+                    
                 }
             }
 
