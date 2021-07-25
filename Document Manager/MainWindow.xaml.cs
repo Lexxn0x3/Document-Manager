@@ -31,46 +31,10 @@ namespace Document_Manager
             InitializeComponent();
             web.Visibility = Visibility.Hidden;
 
-            //tags.AddTag("Siemens");
-            //tags.AddTag("Arbeit");
-            //tags.AddTag("Rechnung");
-
             Document dc = new Document();
             docs = dc.ReadFile();
-            //tags.ReadFile();
-
-            
 
             UpdateTree();
-
-            //docs.Add(new Document(new Uri("file:///D:/Dokumente/Siemens/Siemens%20Ablauf%20Vorbereitung.pdf#toolbar=0"), "Siemens Ablauf Vorbereitung", tags.TagList[0]));
-            //docs.Add(new Document(new Uri("file:///D:/Dokumente/Siemens/Siemens%20vorbereitung.pdf#toolbar=0"), "Siemens Vorbereitung", tags.TagList[0]));
-            //docs.Add(new Document(new Uri("file:///D:/Dokumente/Siemens/Einstellung/Vertrag.pdf#toolbar=0"), "Siemens Vertrag", tags.TagList[0], tags.TagList[1]));
-            //docs.Add(new Document(new Uri("file:///D:/Dokumente/Siemens/Einstellung/Vertrag.pdf#toolbar=0"), "Siemens Vertrag1", tags.TagList[0], tags.TagList[1]));
-            //docs.Add(new Document(new Uri("file:///D:/Downloads/I210002769840%20(1).pdf#toolbar=0"), "Hetzner Rechnung", tags.TagList[2]));
-
-            //foreach (string tag in tags.TagList)
-            //{
-            //    TreeViewItem newChild = new TreeViewItem();
-            //    newChild.Header = tag;
-            //    newChild.Foreground = Brushes.White;
-
-            //    foreach (Document doc in docs)
-            //    {
-            //        if (doc.Tags.Contains(tag))
-            //        {
-            //            TreeViewItem newChild2 = new TreeViewItem();
-            //            newChild2.Header = doc.Name;
-            //            newChild2.DataContext = doc;
-            //            newChild2.Foreground = Brushes.White;
-
-            //            newChild.Items.Add(newChild2);
-            //        }
-            //    }
-            //    trv.Items.Add(newChild);
-            //}
-
-            //UpdateTree();
         }
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -91,7 +55,6 @@ namespace Document_Manager
                     FileAttributes attributes = info.Attributes;
 
                     details.Text = string.Format("Name: {0}\nSize: {1}mbytes\nPath: {2}\nLast Write: {3}", info.Name, Math.Round(((info.Length) * 0.000001), 2).ToString(), info.FullName, info.LastWriteTime.ToString());
-                    //MessageBox.Show(((info.Length)*0.000001).ToString());
                 }
                 else
                     web.Visibility = Visibility.Hidden;
@@ -101,28 +64,38 @@ namespace Document_Manager
 
         private void MenuItem_New_Document_Click(object sender, RoutedEventArgs e)
         {
-            Add_Document w = new Add_Document();
-            w.ShowDialog();
+            bool anotherDocument = false;
+            string lastTags = "";
 
-            Document dc = new Document();
-            docs = dc.ReadFile();
-            tags.TagList = tags.ReadFile();
-            trv.Items.Clear();
-            UpdateTree();
-        }
-
-        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            try
+            do
             {
-                this.DragMove();
-            }
-            catch
-            {
+                Add_Document w = new Add_Document(lastTags);
+                w.ShowDialog();
 
+                anotherDocument = w.AnotherDocument;
+                lastTags = w.AutoTags;
+
+                UpdateTree();
             }
+            while (anotherDocument == true);
+
+            //docs = dc.ReadFile();
+            //tags.TagList = tags.ReadFile();
             
         }
+
+        //private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    try
+        //    {
+        //        this.DragMove();
+        //    }
+        //    catch
+        //    {
+
+        //    }
+            
+        //}
 
         //private void TextBlock_MouseDown_Close(object sender, MouseButtonEventArgs e)
         //{
@@ -243,86 +216,17 @@ namespace Document_Manager
                 catch { }
                 
                 return;
-            }
-            //    foreach (TreeViewItem child in tree.Items)
-            //    {
-            //        tags.Push( " " + child.Header);
-
-            //        Stack<string> tag = new Stack<string>();
-            //        tag.Push(fillTree(child, tags, stack));
-                        
-            //        if (tag.Pop() != "")
-            //        {
-            //            tags.Push(fillTree(child, tags, stack));
-            //        }
-            //        else
-            //        {
-            //            foreach (Document doc in docs)
-            //            {
-            //                bool contains = true;
-            //                foreach (string newTag in tags)
-            //                {
-            //                    if (!doc.Tags.Contains(newTag))
-            //                    {
-            //                        contains = false;
-            //                    }
-            //                }
-
-            //                if (contains && tags.Count >0)
-            //                {
-            //                    TreeViewItem newChild2 = new TreeViewItem();
-            //                    newChild2.Header = doc.Name;
-            //                    newChild2.DataContext = doc;
-            //                    newChild2.Foreground = Brushes.White;
-            //                    child.Items.Add(newChild2);
-            //                }
-                            
-            //            }
-            //        }
-                    
-            //    }
-            //}
-            //else
-            //{
-            //    //stack.Push(tags);
-            //    //tags.Clear();
-            //    tags.Push("");
-            //    return (tags.Pop());
-                
-                
-            //}
-            //return ("");
-            
+            }            
         }
         private void UpdateTree()
         {
+            Document dc = new Document();
             trv.Items.Clear();
+            docs = dc.ReadFile();
             Tree myTree = new Tree();
             trv.Items.Add(myTree.Readfile());
             TreeViewItem tree = (TreeViewItem)trv.Items[0];
             fillTree(tree, new Stack<string>());
-
-
-            //foreach (string tag in tags.TagList)
-            //{
-            //    TreeViewItem newChild = new TreeViewItem();
-            //    newChild.Header = tag;
-            //    newChild.Foreground = Brushes.White;
-
-            //    foreach (Document doc in docs)
-            //    {
-            //        if (doc.Tags.Contains(tag))
-            //        {
-            //            TreeViewItem newChild2 = new TreeViewItem();
-            //            newChild2.Header = doc.Name;
-            //            newChild2.DataContext = doc;
-            //            newChild2.Foreground = Brushes.White;
-
-            //            newChild.Items.Add(newChild2);
-            //        }
-            //    }
-            //    trv.Items.Add(newChild);
-            //}
         }
 
         private void MenuItem_Click_New_Sub(object sender, RoutedEventArgs e)
@@ -359,6 +263,21 @@ namespace Document_Manager
                     UpdateTree();
                 }
  
+            }
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                if (MessageBox.Show("Delete item?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    //do no stuff
+                }
+                else
+                {
+                    //do yes stuff
+                }
             }
         }
     }

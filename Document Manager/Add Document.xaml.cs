@@ -19,11 +19,15 @@ namespace Document_Manager
     /// <summary>
     /// Interaction logic for Add_Document.xaml
     /// </summary>
+    
     public partial class Add_Document
     {
-        public Add_Document()
+        public bool AnotherDocument { get; set; }
+        public string AutoTags { get; set; }
+        public Add_Document(string tags)
         {
             InitializeComponent();
+            Tags.Text = tags;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -31,6 +35,13 @@ namespace Document_Manager
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
             fileName.Text = openFileDialog.FileName;
+
+        }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            AnotherDocument = true;
+            AutoTags = Tags.Text;
+            Button_Click_1(sender, e);
 
         }
 
@@ -76,6 +87,50 @@ namespace Document_Manager
 
 
             this.Close();
+        }
+
+        private void Tags_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string tagsString = Tags.Text;
+            string[] tgs = Tags.Text.Split(',');
+
+            string tag = tgs[tgs.Length-1];
+            tag = tag.Trim();
+
+            Tags tags = new Tags();
+            tags.ReadFile();
+
+            foreach (string tg in tags.TagList)
+            {
+                if (tg.Trim().Contains(tag) && tag.Length > 0)
+                {
+                    //tag = tg.Trim();
+                    tgs[tgs.Length - 1] = tg.Trim();
+
+                    for (int i = 0; i < tgs.Length; i++)
+                    {
+                        tgs[i] = tgs[i].Trim();
+                    }
+
+                    tagsString = String.Join(", ", tgs);
+
+                    autoCompleteText.Text = tagsString;
+
+                    //Tags.Text = tagsString;
+                    //Tags.CaretIndex = Tags.Text.Length;  //Cursor to Last position
+                }
+            }
+        }
+
+        private void Tags_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Tags.Text = autoCompleteText.Text;
+                //Tags.Focus();
+                Tags.CaretIndex = Tags.Text.Length;  //Cursor to Last position
+                
+            }
         }
     }
 }
