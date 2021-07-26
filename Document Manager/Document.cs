@@ -43,7 +43,6 @@ namespace Document_Manager
             if (System.IO.File.Exists(path))
             {
                 string[] lines = System.IO.File.ReadAllLines(path);
-                //string[] lines = System.IO.File.ReadAllLines(@"C:\Users\robin\Desktop\data.txt");
 
                 int dataLine = 1;
 
@@ -111,8 +110,6 @@ namespace Document_Manager
 
                 file += "\n";
             }
-
-            //string[] lines = file.Split("\n");
 
             File.WriteAllText(path, file);
         }

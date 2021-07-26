@@ -73,13 +73,11 @@ namespace Document_Manager
                 sytemTags.AddTag(tag);
             }
 
-            //url = new Uri(fileName.Text);
-
             if (CopyFileCheckBox.IsChecked == true)
             {
                 FileInfo info = new FileInfo(fileName.Text);
                 url = new Uri(Directory.GetCurrentDirectory() + @"\" + info.Name);
-                //File.Create(url.LocalPath);
+
                 if (File.Exists(url.LocalPath))
                 {
                     url = new Uri(url.LocalPath);
@@ -94,7 +92,6 @@ namespace Document_Manager
                 url = new Uri(fileName.Text);
             }
 
-            //url = new Uri(fileName.Text);
             string url2 = url.ToString() + "#toolbar=0";
             url = new Uri(url2, UriKind.Absolute);
 
@@ -125,7 +122,6 @@ namespace Document_Manager
             {
                 if (tg.Trim().Contains(tag) && tag.Length > 0)
                 {
-                    //tag = tg.Trim();
                     tgs[tgs.Length - 1] = tg.Trim();
 
                     for (int i = 0; i < tgs.Length; i++)
@@ -137,8 +133,6 @@ namespace Document_Manager
 
                     autoCompleteText.Text = tagsString;
 
-                    //Tags.Text = tagsString;
-                    //Tags.CaretIndex = Tags.Text.Length;  //Cursor to Last position
                 }
             }
         }
@@ -148,7 +142,7 @@ namespace Document_Manager
             if (e.Key == Key.Enter)
             {
                 Tags.Text = autoCompleteText.Text;
-                //Tags.Focus();
+
                 Tags.CaretIndex = Tags.Text.Length;  //Cursor to Last position
                 
             }

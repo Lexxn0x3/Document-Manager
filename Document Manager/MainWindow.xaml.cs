@@ -80,51 +80,8 @@ namespace Document_Manager
 
                 UpdateTree();
             }
-            while (anotherDocument == true);
-
-            //docs = dc.ReadFile();
-            //tags.TagList = tags.ReadFile();
-            
+            while (anotherDocument == true);            
         }
-
-        //private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    try
-        //    {
-        //        this.DragMove();
-        //    }
-        //    catch
-        //    {
-
-        //    }
-            
-        //}
-
-        //private void TextBlock_MouseDown_Close(object sender, MouseButtonEventArgs e)
-        //{
-        //    this.Close();
-        //}
-
-        //private void TextBlock_MouseDown_Minimize(object sender, MouseButtonEventArgs e)
-        //{
-        //    this.WindowState = WindowState.Minimized;
-        //}
-
-        //private void TextBlock_MouseDown_Maximize(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (Header_MaximizeNormal.Visibility == Visibility.Hidden)
-        //    {
-        //        this.WindowState = WindowState.Maximized;
-        //        Header_MaximizeNormal.Visibility = Visibility.Visible;
-        //        Header_Maximize.Visibility = Visibility.Hidden;
-        //    }
-        //    else
-        //    {
-        //        this.WindowState = WindowState.Normal;
-        //        Header_MaximizeNormal.Visibility = Visibility.Hidden;
-        //        Header_Maximize.Visibility = Visibility.Visible;
-        //    }
-        //}
 
         private TreeViewItem GetStructure(Tree myTree)
         {
@@ -182,7 +139,6 @@ namespace Document_Manager
                     if (child.Items.Count > 0)
                     {
                         fillTree(child, tags);
-                        //tags.Pop();
                     }
                     else
                     {
@@ -209,14 +165,16 @@ namespace Document_Manager
                             
                         }
                         tags.Pop();
-                        //return;
                     }
                 }
                 try
                 {
                     tags.Pop();
                 }
-                catch { }
+                catch(Exception e) 
+                {
+                    MessageBox.Show(e.Message, "Error");
+                }
                 
                 return;
             }            

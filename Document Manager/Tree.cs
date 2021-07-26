@@ -49,7 +49,6 @@ namespace Document_Manager
                     try
                     {
                         element += (Count(child).ToString()) + "\n\n";
-                        //element += (child.Childs.Count()).ToString() + "\n\n";
                     }
                     catch (ArgumentNullException)
                     {
@@ -90,7 +89,6 @@ namespace Document_Manager
         }
         private TreeViewItem GetTree(Queue<string[]> queue, TreeViewItem root)   //To be implemented
         {
-            //TreeViewItem root = new TreeViewItem();
 
             while (queue.Count > 0)
             {
@@ -118,28 +116,6 @@ namespace Document_Manager
                 }
                 
             }
-
-
-            //foreach (string tag in tags.TagList)
-            //{
-            //    TreeViewItem newChild = new TreeViewItem();
-            //    newChild.Header = tag;
-            //    newChild.Foreground = Brushes.White;
-
-            //    foreach (Document doc in docs)
-            //    {
-            //        if (doc.Tags.Contains(tag))
-            //        {
-            //            TreeViewItem newChild2 = new TreeViewItem();
-            //            newChild2.Header = doc.Name;
-            //            newChild2.DataContext = doc;
-            //            newChild2.Foreground = Brushes.White;
-
-            //            newChild.Items.Add(newChild2);
-            //        }
-            //    }
-            //    trv.Items.Add(newChild);
-            //}
 
             return (root);
         }
