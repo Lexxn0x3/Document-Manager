@@ -113,7 +113,18 @@
                     <TreeView Grid.Row="1" KeyDown="OnKeyDownHandler" Name ="trv" Background="Transparent" Foreground="White" SelectedItemChanged="TreeView_SelectedItemChanged" Grid.RowSpan="2">
                     </TreeView>
                 </Grid>
-                <TextBlock Grid.Column="2" x:Name="details" Foreground="White" ClipToBounds="True" UseLayoutRounding="True" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow"/>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Height="200" x:Name="details" Foreground="White" ClipToBounds="True" UseLayoutRounding="True" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow"/>
+                    <Button x:Name="OpenDocumentButton" Grid.Row="1" Content="Open Document" Background="Black" Foreground="White" BorderThickness="0" Opacity="0.5" Click="OpenDocumentButton_Click" />
+                    <Button x:Name="OpenDocumentFolderButton" Grid.Row="2" Content="Open Folder" Background="Black" Foreground="White" BorderThickness="0" Opacity="0.5" Click="OpenDocumentFolderButton_Click" />
+                </Grid>
+                
                 <Rectangle Grid.Column="1" Fill="{DynamicResource GrayBackground}"/>
 
                 <WebBrowser x:Name="web" Grid.Column="1" Visibility="Hidden"/>

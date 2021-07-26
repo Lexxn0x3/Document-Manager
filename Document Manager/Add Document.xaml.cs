@@ -73,7 +73,28 @@ namespace Document_Manager
                 sytemTags.AddTag(tag);
             }
 
-            url = new Uri(fileName.Text);
+            //url = new Uri(fileName.Text);
+
+            if (CopyFileCheckBox.IsChecked == true)
+            {
+                FileInfo info = new FileInfo(fileName.Text);
+                url = new Uri(Directory.GetCurrentDirectory() + @"\" + info.Name);
+                //File.Create(url.LocalPath);
+                if (File.Exists(url.LocalPath))
+                {
+                    url = new Uri(url.LocalPath);
+                }
+                else
+                {
+                    File.Copy(fileName.Text, url.LocalPath);
+                }
+            }
+            else
+            {
+                url = new Uri(fileName.Text);
+            }
+
+            //url = new Uri(fileName.Text);
             string url2 = url.ToString() + "#toolbar=0";
             url = new Uri(url2, UriKind.Absolute);
 

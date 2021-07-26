@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Document_Manager"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         mc:Ignorable="d"
-        Title="Add_Document" Height="160" Width="450" ShowInTaskbar="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" NoiseOpacity="0.01" AcrylicWindowStyle="NoIcon" Foreground="White" TintColor="DimGray" FallbackColor="DimGray" TintOpacity="0.5">
+        Title="Add_Document" Height="200" Width="450" ShowInTaskbar="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" NoiseOpacity="0.01" AcrylicWindowStyle="NoIcon" Foreground="White" TintColor="DimGray" FallbackColor="DimGray" TintOpacity="0.5">
     <Grid>
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -57,6 +57,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="26"/>
+                    <RowDefinition Height="16"/>
                     <RowDefinition Height="16"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="0" Text="Tag's: " HorizontalAlignment="Left" Foreground="White"/>
@@ -64,9 +66,11 @@
                 <TextBlock Name="autoCompleteText" Margin="3,1,0,0" Grid.Column="1" Foreground="DarkGray"/>
                 <TextBox x:Name="Tags" Opacity="0.4" Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Foreground="White" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextChanged="Tags_TextChanged" KeyDown="Tags_KeyDown"/>
                 
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="Add multiple Tag's by seperating them with commas." Foreground="LightGray" FontSize="12" FontWeight="Light"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Add multiple Tag's by seperating them with commas." Foreground="LightGray" FontSize="12" FontWeight="Light"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="Hit Enter for Autocomplete." Foreground="LightGray" FontSize="12" FontWeight="Light"/>
+                <CheckBox x:Name="CopyFileCheckBox" Margin="0,5,0,5" Grid.Row="1" Grid.Column="1" Content="Copy to programm directory"  Foreground="LightGray" FontSize="12" FontWeight="Light"/>
             </Grid>
-            <StackPanel Orientation="Horizontal" Margin="0,6,0,0" HorizontalAlignment="Right" >
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Right" >
                 <Button Margin="0,0,6,0" Height="25" Width="100" HorizontalAlignment="Right" Content="OK and next" Click="Button_Click_2" Background="Black" Foreground="White" BorderThickness="0" Opacity="0.5"/>
                 <Button Margin="0,0,0,0" Height="25" Width="100" HorizontalAlignment="Right" Content="OK" Click="Button_Click_1" Background="Black" Foreground="White" BorderThickness="0" Opacity="0.5"/>
                 </StackPanel>

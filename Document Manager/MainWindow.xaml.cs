@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics;
 
 namespace Document_Manager
 {
@@ -55,6 +56,8 @@ namespace Document_Manager
                     FileAttributes attributes = info.Attributes;
 
                     details.Text = string.Format("Name: {0}\nSize: {1}mbytes\nPath: {2}\nLast Write: {3}", info.Name, Math.Round(((info.Length) * 0.000001), 2).ToString(), info.FullName, info.LastWriteTime.ToString());
+
+                    OpenDocumentButton.DataContext = (string)doc.Url.LocalPath;
                 }
                 else
                     web.Visibility = Visibility.Hidden;
@@ -279,6 +282,44 @@ namespace Document_Manager
                     //do yes stuff
                 }
             }
+        }
+
+        private void OpenDocumentButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFile((string)OpenDocumentButton.DataContext);
+        }
+
+        private void OpenFile(string filePath)
+        {
+
+            if (File.Exists(filePath))
+            {
+                FileInfo info = new FileInfo(filePath);
+                Process.Start(@"explorer.exe", info.FullName);
+            }
+            else
+            {
+                MessageBox.Show("File no available", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void OpenFolder(string folderPath)
+        {
+            FileInfo info = new FileInfo(folderPath);
+
+            if (Directory.Exists(info.DirectoryName))
+            {
+                Process.Start(@"explorer.exe", info.DirectoryName);
+            }
+            else
+            {
+                MessageBox.Show("Directory not available", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+        private void OpenDocumentFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFolder((string)OpenDocumentButton.DataContext);
         }
     }
 }
