@@ -22,7 +22,7 @@ namespace Document_Manager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
         static List<Document> docs = new List<Document>();
         Tags tags = new Tags(); //Auto Read from File
@@ -171,9 +171,9 @@ namespace Document_Manager
                 {
                     tags.Pop();
                 }
-                catch(Exception e) 
+                catch(Exception) 
                 {
-                    MessageBox.Show(e.Message, "Error");
+                    //MessageBox.Show(e.Message, "Error");
                 }
                 
                 return;
@@ -278,6 +278,20 @@ namespace Document_Manager
         private void OpenDocumentFolderButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFolder((string)OpenDocumentButton.DataContext);
+        }
+
+        static public string getDataDirectory(string file)
+        {
+            //string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Document Manager",file);
+
+            string directory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Document Manager");
+            string fileName = System.IO.Path.Combine(directory, file);
+
+            if (Directory.Exists(directory) == false)
+            {
+                Directory.CreateDirectory(directory);
+            }
+            return (fileName);
         }
     }
 }

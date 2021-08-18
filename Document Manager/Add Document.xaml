@@ -48,7 +48,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Name: " HorizontalAlignment="Left" Foreground="White"/>
-                <TextBox x:Name="Name" Opacity="0.4" Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Foreground="White" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <TextBox x:Name="Name" Opacity="0.4" Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Foreground="White" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" PreviewMouseUp="Name_MouseDown"/>
             </Grid>
             <Grid Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
@@ -68,7 +68,7 @@
                 
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Add multiple Tag's by seperating them with commas." Foreground="LightGray" FontSize="12" FontWeight="Light"/>
                 <TextBlock Grid.Row="3" Grid.Column="1" Text="Hit Enter for Autocomplete." Foreground="LightGray" FontSize="12" FontWeight="Light"/>
-                <CheckBox x:Name="CopyFileCheckBox" Margin="0,5,0,5" Grid.Row="1" Grid.Column="1" Content="Copy to programm directory"  Foreground="LightGray" FontSize="12" FontWeight="Light"/>
+                <CheckBox x:Name="CopyFileCheckBox" Margin="0,5,0,5" Grid.Row="1" Grid.Column="1" Content="Copy to programm directory"  Foreground="LightGray" FontSize="12" FontWeight="Light" IsChecked="True"/>
             </Grid>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Right" >
                 <Button Margin="0,0,6,0" Height="25" Width="100" HorizontalAlignment="Right" Content="OK and next" Click="Button_Click_2" Background="Black" Foreground="White" BorderThickness="0" Opacity="0.5"/>

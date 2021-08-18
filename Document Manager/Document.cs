@@ -13,7 +13,10 @@ namespace Document_Manager
         public string Name { get; set; }
         public List<string> Tags { get; set; }
 
-        string path = Directory.GetCurrentDirectory() + @"\data.dat";
+
+        //string path = Directory.GetCurrentDirectory() + @"\data.dat";
+        string path = MainWindow.getDataDirectory("data.dat");
+        //string path = Directory.get + @"\data.dat";
 
         public Document(Uri url, string name, params string[] tags)
         {

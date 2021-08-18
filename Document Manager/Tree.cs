@@ -123,13 +123,13 @@ namespace Document_Manager
         public void WriteFile()
         {
             string file = GetString(Childs);
-            string path = Directory.GetCurrentDirectory() + @"\tree.dat";
+            string path = MainWindow.getDataDirectory("tree.dat");
             File.WriteAllText(path, file);
         }
         public TreeViewItem Readfile()
         {
             string[] file;
-            string path = Directory.GetCurrentDirectory() + @"\tree.dat";
+            string path = MainWindow.getDataDirectory("tree.dat");
             if (!File.Exists(path))
             {
                 File.WriteAllText(path,"");

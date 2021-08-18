@@ -11,7 +11,7 @@ namespace Document_Manager
     {
         public List<string> TagList = new List<string>();
 
-        string path = Directory.GetCurrentDirectory() + @"\tags.dat";
+        string path = MainWindow.getDataDirectory("tags.dat");
 
         public Tags()
         {

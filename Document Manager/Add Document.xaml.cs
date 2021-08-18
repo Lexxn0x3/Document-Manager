@@ -28,14 +28,28 @@ namespace Document_Manager
         {
             InitializeComponent();
             Tags.Text = tags;
+            Name.DataContext = false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = ".pdf";
             openFileDialog.ShowDialog();
-            fileName.Text = openFileDialog.FileName;
 
+            FileInfo info = null;
+            //fileName.Text = openFileDialog.FileName;
+
+            try
+            {
+                info = new FileInfo(openFileDialog.FileName);
+                fileName.Text = info.FullName;
+                Name.Text = (string)System.IO.Path.GetFileNameWithoutExtension(info.Name);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not open file:\n\n" + ex.Message);
+            }
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -76,7 +90,9 @@ namespace Document_Manager
             if (CopyFileCheckBox.IsChecked == true)
             {
                 FileInfo info = new FileInfo(fileName.Text);
-                url = new Uri(Directory.GetCurrentDirectory() + @"\" + info.Name);
+
+                //url = new Uri(Directory.GetCurrentDirectory() + @"\" + info.Name);
+                url = new Uri(MainWindow.getDataDirectory(info.Name));
 
                 if (File.Exists(url.LocalPath))
                 {
@@ -112,6 +128,8 @@ namespace Document_Manager
             string tagsString = Tags.Text;
             string[] tgs = Tags.Text.Split(',');
 
+            Name.DataContext = false;
+
             string tag = tgs[tgs.Length-1];
             tag = tag.Trim();
 
@@ -145,6 +163,15 @@ namespace Document_Manager
 
                 Tags.CaretIndex = Tags.Text.Length;  //Cursor to Last position
                 
+            }
+        }
+
+        private void Name_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((bool)Name.DataContext != true)
+            {
+                Name.DataContext = true;
+                Name.SelectAll();
             }
         }
     }
