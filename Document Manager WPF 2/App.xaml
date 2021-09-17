@@ -1,0 +1,12 @@
+﻿<Application x:Class="Document_Manager_WPF_2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Document_Manager_WPF_2"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+        <SolidColorBrush x:Key="WindowBackground1" Color="#FF242424"/>
+        <SolidColorBrush x:Key="Background2" Color="#FF1A1A1A"/>
+        <SolidColorBrush x:Key="Background3" Color="#FF464646"/>
+    </Application.Resources>
+</Application>

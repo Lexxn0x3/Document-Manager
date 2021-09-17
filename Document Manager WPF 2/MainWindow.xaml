@@ -1,0 +1,106 @@
+﻿<Window x:Class="Document_Manager_WPF_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Document_Manager_WPF_2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1080" Background="{DynamicResource WindowBackground1}" WindowStartupLocation="CenterScreen" WindowState="maximized" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.7*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="1" Text="Tags:" Foreground="White" FontWeight="Bold" Margin="0,0,1,0"/>
+
+                <TextBlock Grid.Column="2" Name="tagsBoxAutoComplete"  VerticalAlignment="Center" Margin="3,0,5,0" Foreground="LightGray"/>
+                <TextBox Grid.Column="2" Name="tagsBox" TextChanged="tagsBox_TextChanged" VerticalAlignment="Center" Margin="0,0,0,0" Background="Transparent" KeyDown="Tags_KeyDown" Foreground="White"/>
+
+            </Grid>
+
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Name="buttonRemove" Click="buttonRemove_Click" Foreground="White" Background="{DynamicResource Background3}" BorderThickness="0">
+                    <TextBlock Text="Remove"/>
+                </Button>
+                <Button Grid.Column="1" Name="buttonEdit" Click="buttonEdit_Click" Foreground="White" Background="{DynamicResource Background3}" BorderThickness="0" Margin="1,0,1,0">
+                    <TextBlock Text="Edit"/>
+                </Button>
+                <Button Grid.Column="2" Name="buttonAdd" Click="buttonAdd_Click" Foreground="White" Background="{DynamicResource Background3}" BorderThickness="0">
+                    <TextBlock Text="Add"/>
+                </Button>
+
+            </Grid>
+
+            <DataGrid Grid.Row="2" x:Name="elementDataGrid" AlternatingRowBackground="{DynamicResource WindowBackground1}" RowBackground="{DynamicResource Background2}" HeadersVisibility="None"  IsReadOnly="True" AutoGenerateColumns="False" GridLinesVisibility="None" 
+                      SelectionMode="Single" SelectionChanged="elementDataGrid_SelectionChanged" Foreground="White" Background="{DynamicResource Background2}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="File Name" Binding="{Binding Name}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Name="openFolderButton" Click="openFolderButton_Click" Foreground="White" Background="{DynamicResource Background3}" BorderThickness="0" Margin="0,0,1,0">
+                    <TextBlock Text="Open Folder"/>
+                </Button>
+
+                <Button Grid.Column="1" Name="openFileButton" Click="openFileButton_Click" Foreground="White" Background="{DynamicResource Background3}" BorderThickness="0">
+                    <TextBlock Text="Open File"/>
+                </Button>
+
+            </Grid>
+        </Grid>
+
+        <WebBrowser Grid.Column="1" Name="web"/>
+
+        <StackPanel Grid.Column="3">
+            <TextBlock Text="Filename" FontWeight="Bold" Foreground="White"/>
+            <TextBox Name="filenameBox" Foreground="White" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+
+            <TextBlock Text="Size" FontWeight="Bold" Foreground="White"/>
+            <TextBox Name="fileSizeBox" Foreground="White" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+
+            <TextBlock Text="Last edit" FontWeight="Bold" Foreground="White"/>
+            <TextBox Name="fileLastEditBox" Foreground="White" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+
+            <TextBlock Text="Date of Creation" FontWeight="Bold" Foreground="White"/>
+            <TextBox Name="fileDateOfCreation" Foreground="White" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+
+            <TextBlock Text="File Url" FontWeight="Bold" Foreground="White"/>
+            <TextBox Name="fileUrlBox" Foreground="White" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+
+            <TextBlock Text="File Tag's" FontWeight="Bold" Foreground="White"/>
+            <TextBox Name="fileTagsBox" Foreground="White" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+
+        </StackPanel>
+    </Grid>
+</Window>
