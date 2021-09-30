@@ -107,34 +107,6 @@ namespace Document_Manager_WPF_2
         private void tagsBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             refreshElementList();
-            //string[] searchTags = Document.stringToTagList(tagsBox.Text);
-
-            //if (tagsBox.Text == "")
-            //{
-            //    resetSearch();
-            //    return;
-            //}
-
-            //FilterDocs.Clear();
-
-            //for (int i = 0; i < Docs.Count; i++)
-            //{
-            //    bool incluedes = true;
-            //    foreach (string tag in searchTags)
-            //    {
-            //        if (!Docs[i].Tags.Contains(tag))
-            //        {
-            //            incluedes = false;
-            //        }
-            //    }
-            //    if (incluedes)
-            //    {
-            //        FilterDocs.Add(Docs[i]);
-            //    }
-            //}
-
-            //tagsBoxAutoComplete.Text = autoComplete(tagsBox.Text, gloabalTags);
-
         }
 
         private void refreshElementList()
@@ -164,7 +136,6 @@ namespace Document_Manager_WPF_2
                     FilterDocs.Add(Docs[i]);
                 }
             }
-
             tagsBoxAutoComplete.Text = autoComplete(tagsBox.Text, gloabalTags);
         }
 
@@ -384,7 +355,6 @@ namespace Document_Manager_WPF_2
 
                     refreshGlobalTags();
                     refreshElementList();
-                    //resetSearch();
                     saveDocuments(Docs);
                 }
             }

@@ -7,14 +7,22 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <PackageIcon>icons8-product-documents.ico</PackageIcon>
-    <ApplicationIcon>D:\A_Projekte\VisualStudio\Document Manager\Document Manager\icons8-product-documents.ico</ApplicationIcon>
+    <ApplicationIcon>TextTemplate.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="TextTemplate.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\Document Manager\icons8-product-documents.ico">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.20348.19" />
   </ItemGroup>
 
 </Project>
