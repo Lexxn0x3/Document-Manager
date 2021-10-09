@@ -51,23 +51,15 @@ namespace Document_Manager_WPF_2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Document doc = new Document(fileNameBox.Text, new Uri(fileDirectoryBox.Text), tagsBox.Text);
-
-            Doc = doc;
-
-            this.Close();
+            applay();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Document doc = new Document(fileNameBox.Text, new Uri(fileDirectoryBox.Text), tagsBox.Text);
-
-            Doc = doc;
-
             AnotherDocument = true;
             Tags = tagsBox.Text;
 
-            this.Close();
+            applay();
         }
 
         private void tagsBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -84,6 +76,30 @@ namespace Document_Manager_WPF_2
                 tagsBox.CaretIndex = tagsBox.Text.Length;  //Cursor to Last position
 
             }
+        }
+
+        private void applay()
+        {
+            Document doc = new Document();
+
+
+
+            if (copyFileCheckBox.IsChecked == true)
+            {
+                Uri fileURL = new Uri(fileDirectoryBox.Text);
+                Uri destURL = new Uri(MainWindow.getDataDirectory(fileNameBox.Text + ".pdf"));
+
+                File.Copy(fileURL.LocalPath, destURL.LocalPath);
+                doc = new Document(fileNameBox.Text, destURL, tagsBox.Text);
+            }
+            else
+            {
+                doc = new Document(fileNameBox.Text, new Uri(fileDirectoryBox.Text), tagsBox.Text);
+            }
+
+            Doc = doc;
+
+            this.Close();
         }
     }
 }

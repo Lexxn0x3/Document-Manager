@@ -7,11 +7,19 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <PackageIcon>icons8-product-documents.ico</PackageIcon>
-    <ApplicationIcon>TextTemplate.ico</ApplicationIcon>
+    <ApplicationIcon>icons8-product-documents.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="TextTemplate.ico" />
+    <Content Include="icons8-product-documents.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -43,8 +43,6 @@ namespace Document_Manager_WPF_2
 
         static public string getDataDirectory(string file)
         {
-            //string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Document Manager",file);
-
             string directory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Document Manager");
             string fileName = System.IO.Path.Combine(directory, file);
 
